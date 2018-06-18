@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista Documentos</title>
+</head>
+<body>
+
+<h1>Lista de Documentos</h1>
+
+<table border=1>
+	<tr>
+		<th><a th:href="@{/documento/new/}" >Nuevo Documento</a></th>
+		<th><a th:href="@{'/favorito/list/'+ ${users.id}}" >Mis Favoritos</a></th>
+		<th><a th:href="@{/documento/list/}" >Mis Documentos</a></th>
+	</tr>
+</table>
+
+	
+	<table border=1>
+			<thead >
+				<tr>
+					<th>Descripcion</th>
+					<th>Ciclo</th>
+					<th>Fecha de Publicacion</th>
+					<th>Valoracion</th>
+					<th>Aportante</th>
+					<th>Favoritos</th>
+					<th>Detalles</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="documento: ${documentos}">
+					<td th:text="${documento.descripcion}"></td>
+					<td th:text="${documento.ciclo}"></td>
+					<td th:text="${documento.fecha}"></td>
+					<td th:text="${documento.valoracion}"></td>
+					<td th:text="${documento.usuario.nombre}"></td>
+					<td><a href="#" th:href="@{'/documento/favorito/'+ ${documento.id}}" th:text="'Agregar'"></a></td>
+					<td><a href="#" th:href="@{'/documento/detalle/'+ ${documento.id}}" th:text="'Ver'"></a></td>
+				</tr>
+			</tbody>
+
+		</table>
+		
+</body>
+</html>

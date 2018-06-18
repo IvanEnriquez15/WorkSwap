@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Nuevo Documento</h1>
+
+		<form th:action="@{/documento/save}" th:object="${documento}" method="post">
+			
+			<div >
+				<label for="descripcion">Descripcion</label>
+				<div >
+					<input type="text" th:field="*{descripcion}"  /> 
+				</div>
+			</div>
+			
+			<div >
+				<label for="ciclo">Ciclo</label>
+				<div >
+					<input type="text" th:field="*{ciclo}"/>
+				</div>
+			</div>			
+			<div >
+				<div >
+					<input type="submit" value="Guardar" />
+				</div>
+			</div>
+			<input type="hidden"  th:field="*{usuario.id}" th:value="${users.id}"/>
+		</form>
+</body>
+</html>

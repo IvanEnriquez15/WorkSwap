@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista Favoritos</title>
+</head>
+<body>
+
+<h1>Lista de Favoritos</h1>
+	
+	<table border=1>
+			<thead >
+				<tr>
+					<th>Descripcion</th>
+					<th>Ciclo</th>
+					<th>Fecha de Publicacion</th>
+					<th>Valoracion</th>
+					<th>Aportante</th>
+					<th>Detalles</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="favorito: ${favoritos}">
+					<td th:text="${favorito.documento.descripcion}"></td>
+					<td th:text="${favorito.documento.ciclo}"></td>
+					<td th:text="${favorito.documento.fecha}"></td>
+					<td th:text="${favorito.documento.valoracion}"></td>
+					<td th:text="${favorito.documento.usuario.nombre}"></td>
+					<td><a href="#" th:href="@{'/documento/detalle/'+ ${favorito.documento.id}}" th:text="'Ver'"></a></td>
+				</tr>
+			</tbody>
+
+		</table>
+		
+</body>
+</html>

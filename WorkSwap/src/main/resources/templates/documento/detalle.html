@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Documento</title>
+</head>
+<body>
+
+<h1>Documento :</h1>
+<a href="#" th:href="@{'/documento/favorito/'+ ${documento.id}}" th:text="'Agregar a Favoritos'"></a>
+
+	<h3 th:text="'Descripcion: '+${documento.descripcion}"></h3>
+	<h3 th:text="'Ciclo: '+${documento.ciclo}"></h3>
+	<h3 th:text="'Valoracion: ' +${documento.valoracion}"></h3>
+	
+	<table border=1>
+			<thead >
+				<tr>
+					<th>Comentario</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="comentario: ${comentarios}">
+					<td th:text="${comentario.contenido}"></td>
+					<td th:text="${comentario.fecha}"></td>
+				</tr>
+			</tbody>
+
+		</table>
+		
+		<form th:action="@{/comentario/save}" th:object="${comentario}" method="post">
+		
+			
+			<div >
+				<label for="comentario">Comentario</label>
+				<div >
+					<textarea th:field="*{contenido}" ></textarea>
+				</div>				
+				<div >
+					<input type="hidden" th:field="*{documento.id}" th:value="${comentario.id}"/>
+					<input type="hidden"  th:field="*{usuario.id}" th:value="${users.id}"/>
+				</div>
+						
+				
+			</div>		
+			<div >
+				<div >
+					<input type="submit" value="Enviar" />
+				</div>
+			</div>
+		</form>
+</body>
+</html>
