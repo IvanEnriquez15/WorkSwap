@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ws.model.dao.ValoracionRepository;
+import com.ws.model.entity.Documento;
+import com.ws.model.entity.Users;
 import com.ws.model.entity.Valoracion;
 
 @Service
@@ -37,5 +39,19 @@ public class ValoracionService implements IValoracionService{
 		// TODO Auto-generated method stub
 		dao.deleteById(id);
 	}
+
+	@Override
+	public Valoracion findByUsersAndDocumento(Users u, Documento d) {
+		// TODO Auto-generated method stub
+		return dao.findByUsersAndDocumento(u, d);
+	}
+
+	@Override
+	public List<Valoracion> findByDocumento(Documento d) {
+		// TODO Auto-generated method stub
+		return dao.findByDocumento(d);
+	}
+
+	
 
 }

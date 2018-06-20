@@ -30,7 +30,7 @@ public class UserController {
 
 		Users users = new Users();
 		model.addAttribute("users", users);
-		model.addAttribute("title", "New User");
+		//model.addAttribute("title", "New User");
 		return "user/form";
 	}
 

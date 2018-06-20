@@ -1,5 +1,7 @@
 package com.ws.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,11 @@ import com.ws.model.entity.Comentario;
 import com.ws.model.entity.Documento;
 import com.ws.model.entity.Favorito;
 import com.ws.model.entity.Users;
+import com.ws.model.entity.Valoracion;
 import com.ws.service.IDocumentoService;
 import com.ws.service.IFavoritoService;
 import com.ws.service.IUserService;
+import com.ws.service.IValoracionService;
 
 
 @Controller
@@ -30,6 +34,9 @@ public class DocumentoController {
 
 	@Autowired
 	private IDocumentoService documentoService;
+	
+	@Autowired
+	private IValoracionService valoracionService;
 	
 	@Autowired
 	private IUserService userService;
@@ -108,11 +115,23 @@ public class DocumentoController {
 		Documento doc = documentoService.findById(id);
 		comentario.setDocumento(doc);
 		comentario.setUsuario(u);
+		double promedio = HallarPromedioValoracion(doc);
+		doc.setValoracion(promedio);
+		
+		
+		Valoracion var =new Valoracion();		
+		var=valoracionService.findByUsersAndDocumento(users, doc);
+		if(var==null) {
+			var=new Valoracion();
+			var.setUsuario(users);
+			var.setDocumento(doc);
+		}
 		
 		model.addAttribute("users",u);	
 		model.addAttribute("comentarios",doc.getComentarios());
 		model.addAttribute("documento",doc);				
 		model.addAttribute("comentario", comentario);
+		model.addAttribute("valoracion", var);
 		return "documento/detalle";	
 	}
 	
@@ -130,4 +149,17 @@ public class DocumentoController {
 		return "redirect:/documento/list/"+users.getId();	
 	}
 	
+	
+	
+	private double HallarPromedioValoracion(Documento d) {
+		double promedio =0;
+		
+		List<Valoracion> valores =  valoracionService.findByDocumento(d);
+		for (Valoracion v :valores) {
+			promedio +=v.getNota();
+		}
+		
+		
+		return  promedio/valores.size();
+	}
 }

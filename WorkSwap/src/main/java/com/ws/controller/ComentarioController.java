@@ -22,7 +22,7 @@ public class ComentarioController {
 	private IComentarioService documentoService;
 	
 	@PostMapping(value = "/save")
-	public String saveCliente(@Valid Comentario comentario, BindingResult result, Model model, SessionStatus status) {
+	public String saveComentario(@Valid Comentario comentario, BindingResult result, Model model, SessionStatus status) {
 
 		if (result.hasErrors()) {
 			return "documento/form";
