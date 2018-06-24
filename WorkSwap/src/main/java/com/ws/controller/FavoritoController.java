@@ -26,6 +26,7 @@ public class FavoritoController {
 		Users users = userService.fetchByIdWithFavoritos(id);
 		
 		model.addAttribute("favoritos",users.getFavoritos());
+		model.addAttribute("users",users);
 		
 		return "favorito/list";
 	}

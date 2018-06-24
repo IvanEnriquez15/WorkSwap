@@ -50,4 +50,12 @@ public class LoginController {
 		return "redirect:/documento/list/" +userValidado.getId();
 		
 	}
+	
+	
+	@GetMapping(value = "/layout")
+	public String layout(Model model) {
+		Users users = new Users();
+		model.addAttribute("users", users);
+		return "layout/layout";
+	}
 }
